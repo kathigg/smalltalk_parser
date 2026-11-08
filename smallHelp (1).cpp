@@ -28,6 +28,10 @@ typedef STVALUEREC* STVALUE;
 struct CLASSREC;
 typedef CLASSREC* CLASS;
 
+struct TALKVALS {
+   
+}; 
+typedef TALKVALS* TALK; 
 
 struct EXPREC
 {
