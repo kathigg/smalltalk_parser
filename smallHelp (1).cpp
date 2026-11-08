@@ -29,7 +29,7 @@ struct CLASSREC;
 typedef CLASSREC* CLASS;
 
 struct TALKVALS {
-   
+
 }; 
 typedef TALKVALS* TALK; 
 
@@ -309,8 +309,10 @@ void initNames()
    printNames[i] = (char* ) "=";     i++;    //9
    printNames[i] = (char* ) "<";     i++;   //10
    printNames[i] = (char* ) ">";     i++;   //11
-   printNames[i] = (char* ) "print";  i++;  //12
-   printNames[i] = (char* ) "self";         //13
+   printNames[i] = (char* ) "print"; i++;   //12
+   printNames[i] = (char* ) "self";  i++;   //13
+   printNames[i] = (char* ) "#nil";  i++;   //14
+   printNames[i] = (char* ) "new";   i++;   //15
    SELF = i;
    numNames = i;
    numBuiltins = i-1;
