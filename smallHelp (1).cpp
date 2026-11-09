@@ -222,8 +222,9 @@ VALUELIST mkValuelist (STVALUE n,  VALUELIST vl)
 
 ENV mkEnv ( NAMELIST nl, VALUELIST vl)
 {
-    ENV rho;
-    
+    ENV rho = new ENVREC;
+    rho->vars=nl;
+    rho->values=vl;
     return rho;
 }/* mkEnv */
 
