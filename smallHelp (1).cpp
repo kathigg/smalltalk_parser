@@ -310,7 +310,7 @@ FUNDEF newFunDef (NAME fname, FUNDEF& fenv)
    f->funname = fname; 
    f->formals = 0;
    f->body = 0;
-   fenv->nextfundef = fenv;
+   f->nextfundef = fenv;
    fenv = f;
    return f;
 } // newFunDef
@@ -594,6 +594,7 @@ EXPLIST parseEL();
 EXP parseExp()
 {
    pos = skipblanks(pos);
+   
    //do it again
 }// parseExp
 
