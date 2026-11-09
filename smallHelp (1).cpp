@@ -212,7 +212,7 @@ NAMELIST mkNamelist ( NAME nm, NAMELIST nl)
 
 VALUELIST mkValuelist (STVALUE n,  VALUELIST vl)
 {
-   VALUELIST newvl;
+   VALUELIST newvl = new VALUELISTREC;
    newvl->head = n;
    newvl->tail = vl; 
    return newvl;
@@ -223,7 +223,7 @@ VALUELIST mkValuelist (STVALUE n,  VALUELIST vl)
 ENV mkEnv ( NAMELIST nl, VALUELIST vl)
 {
     ENV rho;
-    //do it again
+    
     return rho;
 }/* mkEnv */
 
