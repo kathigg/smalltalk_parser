@@ -422,7 +422,7 @@ void nextchar (char& c)
 void readParens()
 {
    int parencnt; // current depth of parentheses 
-   char c;
+   char c = '\0';
    parencnt = 1; // '(' just read
    do
    {
@@ -660,8 +660,7 @@ NAME parseClass()
    //cname is the name of the class being defined, e.g. "FinancialHistory"
    // sname is the name of its parent class (like Object)
    // fname is the name of a method being defined inside the class (like cashOnHand :P)
-   NAME cname, sname, fname; 
-   FUNDEF cenv;
+   NAME cname, sname;
    pos = skipblanks(pos + 1);  // move past '('
    pos = skipblanks(pos + 5); // move past "class"
    cname = parseName(); 
@@ -678,6 +677,10 @@ NAME parseClass()
    pos = skipblanks(pos + 1); // moving past '('
    NAMELIST rep = parseNL(); // parseNL leaves pos just after the variable list's )
    currentClassRec->clrep = rep;
+   if (userinput[pos] == ')') {
+      cout << "Error: class needs at least one method" << endl;
+      exit(1);
+   }
    while (userinput[pos] != ')') {
       parseDef(currentClassRec->exported); // exported is the class's list of methods 
    }
