@@ -291,10 +291,15 @@ CLASS fetchClass (NAME cname)
 /* newClass - add new class cname to classes      */
 CLASS newClass (NAME cname, CLASS super)
 {
+   // a comment: classes points to the first class in the list. 
+   // classes starts as 0. 
    CLASS cl = new CLASSREC;
    cl->clname = cname; 
    cl->clsuper = super; 
-   classes->nextclass=cl; 
+   cl->clrep = 0;
+   cl->exported = 0; 
+   cl->nextclass = classes; 
+   classes=cl;
    return(classes);
 }// newClass
 
