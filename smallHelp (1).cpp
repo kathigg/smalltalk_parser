@@ -594,6 +594,14 @@ EXPLIST parseEL();
 EXP parseExp()
 {
    pos = skipblanks(pos);
+   if (userinput[pos] == '(') {
+      pos = skipblanks(pos + 1); // move past (
+      NAME op = parseName(); // read the operator!
+      EXPLIST args = parseEL(); 
+      return mkAPEXP(op, args); 
+   }
+   if (isValue(pos)) return mkVALEXP(parseVal()); 
+   return mkVAREXP(parseName()); 
    
    //do it again
 }// parseExp
@@ -601,6 +609,7 @@ EXP parseExp()
 // parseEL - return EXPLIST starting at userinput[pos]
 EXPLIST parseEL()
 {
+   EXPLIST 
    pos = skipblanks(pos);
    //do it again
  
