@@ -245,7 +245,10 @@ int lengthVL ( VALUELIST vl)
 int lengthNL ( NAMELIST nl)
 {
    int i = 0;
-   //do it again
+   while (nl != 0) {
+      i++;
+      nl = nl->tail;
+   }
    return i;
 }/* lengthNL */
 
