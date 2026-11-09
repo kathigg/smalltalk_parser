@@ -613,7 +613,15 @@ NAME parseDef (FUNDEF& fenv)
 {
    NAME fname;        // function name
    FUNDEF newfun;     // new FUNDEFREC
-  //do this again (almost the same)
+   pos = skipblanks(pos); 
+   if (userinput[pos] == ')') {
+      pos = skipblanks(pos+1);
+      // nothing to parse
+      return 0;
+   }
+   pos = skipblanks(pos+5); //skip "begin"
+   newfun->formals = parsesomething??(); 
+   
    return(fname);
 } // parseDef
 
@@ -641,7 +649,8 @@ NAME parseClass()
    NAMELIST rep = parseNL(); // parseNL leaves pos just after the variable list's )
    currentClassRec->clrep = rep;
    while (userinput[pos] != ')') {
-      parseDef(currentClassRec->exported); 
+      parseDef(currentClassRec->exported); // exported is the class's list of methods 
+   }
    pos = skipblanks(pos+1); // consume the class's final )
    return cname; 
 
