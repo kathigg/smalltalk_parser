@@ -168,8 +168,10 @@ STVALUE mkINT (int n )
 
 STVALUE mkSYM ( NAME s)
 {
-   STVALUE newval;
-    //do it
+   STVALUE newval = new STVALUEREC; 
+   newval->owner = OBJECTCLASS;
+   newval->vtype = SYM; 
+   newval->symval = s; 
    return(newval);
 } /* mkSYM */
 
@@ -177,8 +179,10 @@ STVALUE mkSYM ( NAME s)
 
 STVALUE mkUSER (ENV rho, CLASS ownr)
 {
-   STVALUE newval;
-    //do it
+   STVALUE newval = new STVALUEREC; 
+   newval->owner=ownr; 
+   newval->vtype = USER; 
+   newval->userval = rho; 
    return(newval);
 } /* mkUSER */
 
@@ -188,8 +192,9 @@ STVALUE mkUSER (ENV rho, CLASS ownr)
 EXPLIST mkExplist (EXP e, EXPLIST el)
 {
     EXPLIST newel;
-    //do it again
-    return newel;
+    newel->head=e;
+    newel->tail=el;
+    
 }/* mkExplist */
 
 /* mkNamelist - return a NAMELIST with head n and tail nl        */
