@@ -233,7 +233,10 @@ ENV mkEnv ( NAMELIST nl, VALUELIST vl)
 int lengthVL ( VALUELIST vl)
 {
    int i = 0;
-   //do it again
+   while (vl != 0) {
+      i++;
+      vl = vl->tail;
+   }
    return i;
 }/* lengthVL */
 
