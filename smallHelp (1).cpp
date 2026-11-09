@@ -203,7 +203,8 @@ EXPLIST mkExplist (EXP e, EXPLIST el)
 NAMELIST mkNamelist ( NAME nm, NAMELIST nl)
 {
    NAMELIST newnl = new NAMELISTREC;
-   newnl->
+   newnl->head = nm;
+   newnl->tail = nl;
    return newnl;
 }/* mkNamelist */
 
