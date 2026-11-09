@@ -306,8 +306,9 @@ CLASS newClass (NAME cname, CLASS super)
 //  newFunDef - add new function fname to fenv
 FUNDEF newFunDef (NAME fname, FUNDEF& fenv)
 {
-   FUNDEF f;
- //do it
+   FUNDEF f = new FUNDEFREC; 
+   f->funname = fname; 
+   fenv->nextfundef = f; 
    return f;
 } // newFunDef
 
@@ -493,12 +494,17 @@ void reader ()
 
 NAME parseName()
 {
-   char nm[35]; // array to accumulate characters
+   char nm[NAMELENG + 1]; // room for name and ending \0
    int leng; // length of name
    leng = 0;
    while ( (pos <= inputleng) && !isDelim(userinput[pos]) )
    {
 	    
+	   if (leng == NAMELENG)
+	   {
+	      cout << "Error: name is too long" << endl;
+	      exit(1);
+	   }
 	    nm[leng] = userinput[pos];
 	   pos++;
 	   leng++;
@@ -618,7 +624,7 @@ NAME parseDef (FUNDEF& fenv)
    NAMELIST formals = parseNL(); // reads parameter names 
    EXP body = parseExp(); 
    pos = skipblanks(pos + 1); // skip definition's final )
-   FUNDEF newfun = newFunDef(fname, fenv); 
+   FUNDEF newfun = newFunDef(fname, fenv); // fenv is the list of function definitions 
    newfun->formals = formals;
    newfun->body=body;
    return fname;
