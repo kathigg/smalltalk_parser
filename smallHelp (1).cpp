@@ -575,6 +575,14 @@ int isValue (int pos)
 STVALUE parseVal()
 {
     STVALUE s;    
+    if (userinput[pos] == '#') { // it's SYM
+      return mkSYM(parseName()); 
+    }
+    if (isNumber(pos)) {  // it's an INT  
+      return mkINT(parseInt()); 
+    }
+   cout << "Error: expected a value!" << endl;
+   exit (1); 
     //do it two possibilities; SYM and INT
         
 }
