@@ -121,8 +121,9 @@ int   quittingtime;
 
 EXP mkVALEXP ( STVALUE v)
 {
-   EXP e;
-  //do it again
+   EXP e = new EXPREC;
+   e->etype=VALEXP; 
+   e->valu=v;
    return e;
 }/* mkVALEXP */
 
@@ -131,8 +132,9 @@ EXP mkVALEXP ( STVALUE v)
 
 EXP mkVAREXP ( NAME nm)
 {
-   EXP e;
-    //do it again
+   EXP e = new EXPREC; 
+   e->etype=VAREXP;
+   e->varble=nm;
    return e;
 }/* mkVAREXP */
 
