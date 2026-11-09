@@ -611,10 +611,13 @@ NAME parseDef (FUNDEF& fenv)
 
 NAME parseClass()
 {
-   NAME cname, sname, fname;
-   CLASS thisclass, superclass;
+   //cname is the name of the class being defined, e.g. "FinancialHistory"
+   // sname is the name of its parent class (like Object)
+   // fname is the name of a method being defined inside the class (like cashOnHand :P)
+   NAME cname, sname, fname; 
    NAMELIST rep;;
    FUNDEF cenv;
+
    //This is long please be very careful
    return cname;
 }// parseClass
