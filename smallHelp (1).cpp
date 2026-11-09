@@ -213,7 +213,8 @@ NAMELIST mkNamelist ( NAME nm, NAMELIST nl)
 VALUELIST mkValuelist (STVALUE n,  VALUELIST vl)
 {
    VALUELIST newvl;
-    //do it again
+   newvl->head = n;
+   newvl->tail = vl; 
    return newvl;
 }/* mkValuelist */
 
