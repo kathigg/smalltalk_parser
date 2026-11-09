@@ -597,7 +597,15 @@ NAMELIST parseNL()
 {
    NAME nm;
    NAMELIST nl, nlr;
-   //do is again
+   pos = skipblanks(pos);
+   if (userinput[pos] == ')') {
+      pos = skipblanks(pos+1);
+      // nothing's in here to parse! empty (). 
+      return 0;
+   }
+   nm = parseName(); // reads one name and moves pos past it
+   nl = parseNL(); // reads all the names that remain 
+   nlr = mkNamelist(nm, nl);
    return nlr;
 }// parseNL
 
@@ -615,11 +623,28 @@ NAME parseClass()
    // sname is the name of its parent class (like Object)
    // fname is the name of a method being defined inside the class (like cashOnHand :P)
    NAME cname, sname, fname; 
-   NAMELIST rep;;
    FUNDEF cenv;
+   pos = skipblanks(pos + 1);  // move past '('
+   pos = skipblanks(pos + 5); // move past "class"
+   cname = parseName(); 
+   sname = parseName(); 
    
-   //This is long please be very careful
-   return cname;
+   CLASS superclass = fetchClass(sname); 
+   if (superclass == 0) {
+      cout << "unknown superclass! :>"; 
+      prName(sname); 
+      cout << endl;
+      exit(1);
+   }
+   CLASS currentClassRec = newClass(cname, superclass); 
+   pos = skipblanks(pos + 1); // moving past '('
+   NAMELIST rep = parseNL(); // parseNL leaves pos just after the variable list's )
+   currentClassRec->clrep = rep;
+   while (userinput[pos] != ')') {
+      parseDef(currentClassRec->exported); 
+   pos = skipblanks(pos+1); // consume the class's final )
+   return cname; 
+
 }// parseClass
 
 
