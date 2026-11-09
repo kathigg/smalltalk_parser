@@ -316,8 +316,6 @@ FUNDEF newFunDef (NAME fname, FUNDEF& fenv)
 } // newFunDef
 
 
-
-
 // initNames - place all pre-defined names into printNames 
 
 void initNames()
