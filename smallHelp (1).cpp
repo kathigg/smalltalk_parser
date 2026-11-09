@@ -617,7 +617,11 @@ NAME parseDef (FUNDEF& fenv)
    pos = skipblanks(pos+1); // skip ( before parameters
    NAMELIST formals = parseNL(); // reads parameter names 
    EXP body = parseExp(); 
-   pos 
+   pos = skipblanks(pos + 1); // skip definition's final )
+   FUNDEF newfun = newFunDef(fname, fenv); 
+   newfun->formals = formals;
+   newfun->body=body;
+   return fname;
 } // parseDef
 
 NAME parseClass()
