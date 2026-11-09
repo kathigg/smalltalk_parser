@@ -28,11 +28,6 @@ typedef STVALUEREC* STVALUE;
 struct CLASSREC;
 typedef CLASSREC* CLASS;
 
-struct TALKVALS {
-
-}; 
-typedef TALKVALS* TALK; 
-
 struct EXPREC
 {
 	  EXPTYPE etype; //what type of expression
@@ -310,12 +305,11 @@ void initNames()
    printNames[i] = (char* ) "<";     i++;   //10
    printNames[i] = (char* ) ">";     i++;   //11
    printNames[i] = (char* ) "print"; i++;   //12
-   printNames[i] = (char* ) "self";  i++;   //13
+   printNames[i] = (char* ) "self";SELF = i;//13
+   i++;
    printNames[i] = (char* ) "#nil";  i++;   //14
-   printNames[i] = (char* ) "new";   i++;   //15
-   SELF = i;
-   numNames = i;
-   numBuiltins = i-1;
+   numNames = i - 1;
+   numBuiltins = 12;
 }//initNames
 
 // install - insert new name into printNames  
