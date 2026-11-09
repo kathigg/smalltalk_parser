@@ -310,7 +310,7 @@ FUNDEF newFunDef (NAME fname, FUNDEF& fenv)
    f->funname = fname; 
    f->formals = 0;
    f->body = 0;
-   fenv->nextfundef = f; 
+   fenv->nextfundef = fenv;
    fenv = f;
    return f;
 } // newFunDef
