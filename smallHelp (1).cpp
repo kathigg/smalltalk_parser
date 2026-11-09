@@ -280,7 +280,7 @@ CLASS fetchClass (NAME cname)
     CLASS cl;
     cl = classes;
     while (cl != 0) { 
-      if (cl->clname = cname) return cl; 
+      if (cl->clname == cname) return cl; 
       cl = cl->nextclass; 
     }
     return 0;
