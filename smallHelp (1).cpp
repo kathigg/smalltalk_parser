@@ -191,9 +191,10 @@ STVALUE mkUSER (ENV rho, CLASS ownr)
 
 EXPLIST mkExplist (EXP e, EXPLIST el)
 {
-    EXPLIST newel;
+    EXPLIST newel = new EXPLISTREC; 
     newel->head=e;
     newel->tail=el;
+    return newel; 
     
 }/* mkExplist */
 
@@ -201,8 +202,8 @@ EXPLIST mkExplist (EXP e, EXPLIST el)
 
 NAMELIST mkNamelist ( NAME nm, NAMELIST nl)
 {
-   NAMELIST newnl;
-    //do it again
+   NAMELIST newnl = new NAMELISTREC;
+   newnl->
    return newnl;
 }/* mkNamelist */
 
