@@ -611,18 +611,13 @@ NAMELIST parseNL()
 
 NAME parseDef (FUNDEF& fenv)
 {
-   NAME fname;        // function name
-   FUNDEF newfun;     // new FUNDEFREC
-   pos = skipblanks(pos); 
-   if (userinput[pos] == ')') {
-      pos = skipblanks(pos+1);
-      // nothing to parse
-      return 0;
-   }
-   pos = skipblanks(pos+5); //skip "begin"
-   newfun->formals = parsesomething??(); 
-   
-   return(fname);
+   pos = skipblanks(pos + 1); // skip ( 
+   pos = skipblanks(pos + 6); // skip define
+   NAME fname = parseName(); // reads variable name like double in (define double (x) (+x x))
+   pos = skipblanks(pos+1); // skip ( before parameters
+   NAMELIST formals = parseNL(); // reads parameter names 
+   EXP body = parseExp(); 
+   pos 
 } // parseDef
 
 NAME parseClass()
