@@ -279,7 +279,10 @@ CLASS fetchClass (NAME cname)
 {
     CLASS cl;
     cl = classes;
-    //do it
+    while (cl != 0) { 
+      if (cl->clname = cname) return cl; 
+      cl = cl->nextclass; 
+    }
     return 0;
 }// fetchClass 
 
@@ -289,7 +292,9 @@ CLASS fetchClass (NAME cname)
 CLASS newClass (NAME cname, CLASS super)
 {
    CLASS cl = new CLASSREC;
- //do it
+   cl->clname = cname; 
+   cl->clsuper = super; 
+   classes->nextclass=cl; 
    return(classes);
 }// newClass
 
