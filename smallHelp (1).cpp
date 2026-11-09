@@ -609,9 +609,15 @@ EXP parseExp()
 // parseEL - return EXPLIST starting at userinput[pos]
 EXPLIST parseEL()
 {
-   EXPLIST 
    pos = skipblanks(pos);
-   //do it again
+   if (userinput[pos] == ')') {
+      pos = skipblanks(pos + 1); // skip ) 
+      return 0;
+      // nothing in there!
+   }
+   EXP first = parseExp(); // read one argument
+   EXPLIST rest = parseEL(); // read the rest! 
+   return mkExplist(first, rest); 
  
 }// parseEL
 
