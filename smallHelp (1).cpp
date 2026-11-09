@@ -308,7 +308,10 @@ FUNDEF newFunDef (NAME fname, FUNDEF& fenv)
 {
    FUNDEF f = new FUNDEFREC; 
    f->funname = fname; 
+   f->formals = 0;
+   f->body = 0;
    fenv->nextfundef = f; 
+   fenv = f;
    return f;
 } // newFunDef
 
