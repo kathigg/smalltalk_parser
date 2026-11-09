@@ -143,8 +143,10 @@ EXP mkVAREXP ( NAME nm)
 
 EXP mkAPEXP (NAME op, EXPLIST el)
 {
-   EXP  e;
-    //do it again
+   EXP  e = new EXPREC;
+   e->etype = APEXP; 
+   e->optr = op;
+   e->args = el;
    return e;
 }/* mkAPEXP */
 
