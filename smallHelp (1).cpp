@@ -660,33 +660,46 @@ NAME parseClass()
    //cname is the name of the class being defined, e.g. "FinancialHistory"
    // sname is the name of its parent class (like Object)
    // fname is the name of a method being defined inside the class (like cashOnHand :P)
-   NAME cname, sname;
+   NAME cname, sname, fname;
+   CLASS thisclass, superclass;
+   NAMELIST rep;
+   FUNDEF cenv;
+   pos = skipblanks(pos);
    pos = skipblanks(pos + 1);  // move past '('
+   pos = skipblanks(pos);
    pos = skipblanks(pos + 5); // move past "class"
    cname = parseName(); 
    sname = parseName(); 
    
-   CLASS superclass = fetchClass(sname); 
+   superclass = fetchClass(sname); 
    if (superclass == 0) {
       cout << "unknown superclass! :>"; 
       prName(sname); 
       cout << endl;
       exit(1);
+      //goto 99
    }
-   CLASS currentClassRec = newClass(cname, superclass); 
+   thisclass = newClass(cname, superclass); 
+   pos = skipblanks(pos); 
    pos = skipblanks(pos + 1); // moving past '('
-   NAMELIST rep = parseNL(); // parseNL leaves pos just after the variable list's )
-   currentClassRec->clrep = rep;
-   if (userinput[pos] == ')') {
-      cout << "Error: class needs at least one method" << endl;
-      exit(1);
+   rep = parseNL(); // parseNL leaves pos just after the variable list's )
+   cenv = 0;
+   pos = skipblanks(pos); 
+   while (userinput[pos] == '(') {
+      pos = skipblanks(pos); 
+      fname = parseDef(cenv); 
+      prName(fname);
+      cout << endl;
    }
-   while (userinput[pos] != ')') {
-      parseDef(currentClassRec->exported); // exported is the class's list of methods 
+   thisclass->exported = cenv;
+   if (rep == 0) thisclass->clrep = superclass->clrep; 
+   else {
+      thisclass->clrep = rep;
+      while (rep->tail != 0) rep->tail = superclass->clrep;
    }
-   pos = skipblanks(pos+1); // consume the class's final )
-   return cname; 
-
+   pos = skipblanks(pos); 
+   pos=skipblanks(pos+1); // skip ')'
+   return cname;
 }// parseClass
 
 
