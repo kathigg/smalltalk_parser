@@ -696,7 +696,8 @@ NAME parseClass()
    else {
       thisclass->clrep = rep;
       NAMELIST last = rep;
-      while (rep->tail != 0) rep->tail = superclass->clrep;
+      while (last->tail != 0) last = last->tail; 
+      last->tail = superclass->clrep;
    }
    pos = skipblanks(pos); 
    pos=skipblanks(pos+1); // skip ')'
